@@ -1,22 +1,22 @@
 import { createReporter } from "https://deno.land/x/g_a/mod.ts";
-import { serve } from "https://deno.land/std/http/server.ts";
-import type { ConnInfo } from "https://deno.land/std/http/server.ts";
+import { FreshContext } from "$fresh/server.ts";
+
+interface State {
+    data: string;
+}  
 
 const ga = createReporter();
 
-function handler(req: Request, conn: ConnInfo) {
+export async function handler(req: Request, ctx: FreshContext<State>,) {
   let err;
   let res: Response;
+
   const start = performance.now();
   try {
-    // processing of the request...
-    res = new Response(/* response details */);
+    const resp = await ctx.next();
+    ga(req, ctx, res!, start, err);
+    return resp;
   } catch (e) {
     err = e;
-  } finally {
-    ga(req, conn, res!, start, err);
   }
-  return res!;
 }
-
-serve(handler);
