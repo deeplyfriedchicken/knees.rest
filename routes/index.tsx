@@ -1,24 +1,19 @@
-import { useSignal } from "@preact/signals";
-import Counter from "../islands/Counter.tsx";
+import { LinkItem } from "../components/LinkItem.tsx";
+
+const Links = [
+  { name: 'YouTube', imgPath: "/youtube.webp", url: "https://www.youtube.com/@JumpingIsGood" },
+  { name: 'Instagram', imgPath: "/instagram.webp", url: "https://www.instagram.com/jumping.is.good/" },
+  { name: 'Oakland Mini 6/2/2024', imgPath: "/google_drive.webp", url: "https://drive.google.com/drive/folders/1UFbx9db0--c-cyZmcXnqut3eu2D_x-5v?usp=drive_link" },
+  { name: 'LA Mini 2024', imgPath: "/google_drive.webp", url: "https://drive.google.com/drive/folders/1LOoQaPULizTWSIHuTPT58T_T9Q0BlDgw?usp=drive_link" },
+]
 
 export default function Home() {
-  const count = useSignal(3);
   return (
-    <div class="px-4 py-8 mx-auto bg-[#86efac]">
-      <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
-        <img
-          class="my-6"
-          src="/logo.svg"
-          width="128"
-          height="128"
-          alt="the Fresh logo: a sliced lemon dripping with juice"
-        />
-        <h1 class="text-4xl font-bold">Welcome to Fresh</h1>
-        <p class="my-4">
-          Try updating this message in the
-          <code class="mx-2">./routes/index.tsx</code> file, and refresh.
-        </p>
-        <Counter count={count} />
+    <div class="container mx-auto">
+      <div class="max-w-xs mx-auto">
+        {Links.map((linkProps) => (
+          <LinkItem {...linkProps} />
+        ))}
       </div>
     </div>
   );

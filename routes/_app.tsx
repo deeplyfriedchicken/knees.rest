@@ -8,7 +8,7 @@ export default function App({ Component }: PageProps) {
         <title>knees.rest</title>
         <link rel="stylesheet" href="/styles.css" />
       </head>
-      <body>
+      <body class="min-h-screen bg-gray-100">
         <Component />
       </body>
     </html>
